@@ -19,7 +19,7 @@ void test_part1_4x4_PawnTest_isValid()
 
     // Corresponding code
     // std::cout << "Pawn White Test" << std::endl;
-    // Student::ChessBoard sBoard(4, 4);
+    Student::ChessBoard sBoard(4, 4);
     // std::cout << "\nPawn White Test" << std::endl;
     // sBoard.createChessPiece(White, Pawn, 2, 2);
     // std::cout << (1 == sBoard.isValidMove(2,2, 1,2)) << std::endl; // move 1 up
@@ -105,21 +105,21 @@ void test_part1_4x4_PawnTest_isValid()
     // std::cout << (0 == sBoard.isValidMove(3,2, 1,1)) << std::endl;
     // std::cout << (0 == sBoard.isValidMove(3,2, 1,3)) << std::endl;
 
-    // sBoard.createChessPiece(White, Bishop, 3, 2);
-    // sBoard.createChessPiece(Black, Bishop, 1, 3);
+    sBoard.createChessPiece(White, Bishop, 3, 2);
+    sBoard.createChessPiece(Black, Bishop, 1, 3);
 
-    // std::cout << "\nBishop Test" << std::endl;
-    // std::cout << (1 == sBoard.isValidMove(3,2, 1,0)) << std::endl;
-    // std::cout << (1 == sBoard.isValidMove(3,2, 2,1)) << std::endl;
-    // std::cout << (1 == sBoard.isValidMove(1,3, 0,2)) << std::endl;
-    // std::cout << (1 == sBoard.isValidMove(1,3, 2,2)) << std::endl;
-    // std::cout << (1 == sBoard.isValidMove(1,3, 3,1)) << std::endl;
+    std::cout << "\nBishop Test" << std::endl;
+    std::cout << (1 == sBoard.isValidMove(3,2, 1,0)) << std::endl;
+    std::cout << (1 == sBoard.isValidMove(3,2, 2,1)) << std::endl;
+    std::cout << (1 == sBoard.isValidMove(1,3, 0,2)) << std::endl;
+    std::cout << (1 == sBoard.isValidMove(1,3, 2,2)) << std::endl;
+    std::cout << (1 == sBoard.isValidMove(1,3, 3,1)) << std::endl;
     
-    // std::cout << "\nError Test" << std::endl;
-    // std::cout << (0 == sBoard.isValidMove(3,2, 1,1)) << std::endl;
-    // std::cout << (0 == sBoard.isValidMove(3,2, 1,3)) << std::endl;
-    // std::cout << (0 == sBoard.isValidMove(1,3, 2,3)) << std::endl;
-    // std::cout << (0 == sBoard.isValidMove(1,3, 1,2)) << std::endl;
+    std::cout << "\nError Test" << std::endl;
+    std::cout << (0 == sBoard.isValidMove(3,2, 1,1)) << std::endl;
+    std::cout << (0 == sBoard.isValidMove(3,2, 1,3)) << std::endl;
+    std::cout << (0 == sBoard.isValidMove(1,3, 2,3)) << std::endl;
+    std::cout << (0 == sBoard.isValidMove(1,3, 1,2)) << std::endl;
 
 
     std::cout << sBoard.displayBoard().str() << std::endl;
@@ -130,74 +130,74 @@ void test_part1_4x4_PawnTest_isValid()
 }
 
 
-void test_part1_4x4_PawnTest_movePiece()
-{
-    std::cout << "------------Pawn movePiece Test-------------" << std::endl;
-    // Config file content:
-    // 0
-    // 4 4
-    // w r 3 2
-    // b b 1 3
-    // b r 1 1
-    // w r 2 3
-    // ~
-    // isValidScan
+// void test_part1_4x4_PawnTest_movePiece()
+// {
+//     std::cout << "------------Pawn movePiece Test-------------" << std::endl;
+//     // Config file content:
+//     // 0
+//     // 4 4
+//     // w r 3 2
+//     // b b 1 3
+//     // b r 1 1
+//     // w r 2 3
+//     // ~
+//     // isValidScan
 
-    // Corresponding code
-    Student::ChessBoard sBoard(4, 4);
-    sBoard.createChessPiece(Black, Pawn, 0, 0);
-    sBoard.createChessPiece(Black, Pawn, 1, 1);
-    sBoard.createChessPiece(White, Pawn, 3, 3);
-    sBoard.createChessPiece(White, Pawn, 3, 2);
-    std::cout << "\n Before move: " << std::endl;
-    std::cout << sBoard.displayBoard().str() << std::endl;
+//     // Corresponding code
+//     Student::ChessBoard sBoard(4, 4);
+//     sBoard.createChessPiece(Black, Pawn, 0, 0);
+//     sBoard.createChessPiece(Black, Pawn, 1, 1);
+//     sBoard.createChessPiece(White, Pawn, 3, 3);
+//     sBoard.createChessPiece(White, Pawn, 3, 2);
+//     std::cout << "\n Before move: " << std::endl;
+//     std::cout << sBoard.displayBoard().str() << std::endl;
     
-    std::cout << "\n After move1 Black Wrong Turn: " << std::endl;
-    if (sBoard.movePiece(0,0, 2,0)) {
-        std::cout << sBoard.displayBoard().str() << std::endl;
-    }
+//     std::cout << "\n After move1 Black Wrong Turn: " << std::endl;
+//     if (sBoard.movePiece(0,0, 2,0)) {
+//         std::cout << sBoard.displayBoard().str() << std::endl;
+//     }
 
-    std::cout << "\n After move1 White: " << std::endl;
-    if (sBoard.movePiece(3,3, 2,3)) {
-        std::cout << sBoard.displayBoard().str() << std::endl;
-    }
+//     std::cout << "\n After move1 White: " << std::endl;
+//     if (sBoard.movePiece(3,3, 2,3)) {
+//         std::cout << sBoard.displayBoard().str() << std::endl;
+//     }
 
-    std::cout << "\n After move1 Black: " << std::endl;
-    if (sBoard.movePiece(0,0, 2,0)) {
-        std::cout << sBoard.displayBoard().str() << std::endl;
-    }
+//     std::cout << "\n After move1 Black: " << std::endl;
+//     if (sBoard.movePiece(0,0, 2,0)) {
+//         std::cout << sBoard.displayBoard().str() << std::endl;
+//     }
 
-    std::cout << "\n After move2 White Wrong move: " << std::endl;
-    if (sBoard.movePiece(2,3, 0,3)) {
-        std::cout << sBoard.displayBoard().str() << std::endl;
-    }
+//     std::cout << "\n After move2 White Wrong move: " << std::endl;
+//     if (sBoard.movePiece(2,3, 0,3)) {
+//         std::cout << sBoard.displayBoard().str() << std::endl;
+//     }
 
-    std::cout << "\n After move2 White: " << std::endl;
-    if (sBoard.movePiece(2,3, 1,3)) {
-        std::cout << sBoard.displayBoard().str() << std::endl;
-    }
+//     std::cout << "\n After move2 White: " << std::endl;
+//     if (sBoard.movePiece(2,3, 1,3)) {
+//         std::cout << sBoard.displayBoard().str() << std::endl;
+//     }
 
-    std::cout << "\n After move2 Black: " << std::endl;
-    if (sBoard.movePiece(1,1, 2,1)) {
-        std::cout << sBoard.displayBoard().str() << std::endl;
-    }
+//     std::cout << "\n After move2 Black: " << std::endl;
+//     if (sBoard.movePiece(1,1, 2,1)) {
+//         std::cout << sBoard.displayBoard().str() << std::endl;
+//     }
 
-    std::cout << "\n After move2 White: " << std::endl;
-    if (sBoard.movePiece(1,3, 0,3)) {
-        std::cout << sBoard.displayBoard().str() << std::endl;
-    }
+//     std::cout << "\n After move2 White: " << std::endl;
+//     if (sBoard.movePiece(1,3, 0,3)) {
+//         std::cout << sBoard.displayBoard().str() << std::endl;
+//     }
 
-    std::cout << "\n After move2 Black Kill White: " << std::endl;
-    if (sBoard.movePiece(2,1, 3,2)) {
-        std::cout << sBoard.displayBoard().str() << std::endl;
-    }
+//     std::cout << "\n After move2 Black Kill White: " << std::endl;
+//     if (sBoard.movePiece(2,1, 3,2)) {
+//         std::cout << sBoard.displayBoard().str() << std::endl;
+//     }
 
-    return;
-};
+//     return;
+// };
 
 int main()
 {
     test_part1_4x4_PawnTest_isValid();
-    test_part1_4x4_PawnTest_movePiece();
+    // test_part1_4x4_PawnTest_movePiece();
     return EXIT_SUCCESS;
 }

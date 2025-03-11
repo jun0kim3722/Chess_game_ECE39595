@@ -4,8 +4,7 @@
 
 using Student::BishopPiece;
 
-BishopPiece::BishopPiece(ChessBoard &board, Color color, int row, int col) 
-    : ChessPiece(board, color, row, col), _board(board)
+BishopPiece::BishopPiece(ChessBoard &board, Color color, int row, int col) : ChessPiece(board, color, row, col), _board(board)
 {
     _row = row;
     _col = col;
