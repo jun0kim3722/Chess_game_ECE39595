@@ -4,7 +4,7 @@
 #include "ChessPiece.hh"
 #include <iostream>
 
-void test_part1_4x4_1()
+void test_part1_4x4_PawnTest()
 {
     // Config file content:
     // 0
@@ -61,6 +61,6 @@ void test_part1_4x4_1()
 
 int main()
 {
-    test_part1_4x4_1();
+    test_part1_4x4_PawnTest();
     return EXIT_SUCCESS;
 }
