@@ -28,6 +28,8 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
 
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
     ChessPiece *piece = getPiece(fromRow, fromColumn);
+    
+    if (piece == nullptr) return false;
     return piece -> canMoveToLocation(toRow, toColumn);
 }
 
