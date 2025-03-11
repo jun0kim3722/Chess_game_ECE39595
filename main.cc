@@ -2,6 +2,7 @@
 #include "Chess.h"
 #include "ChessBoard.hh"
 #include "ChessPiece.hh"
+#include <iostream>
 
 void test_part1_4x4_1()
 {
@@ -17,10 +18,13 @@ void test_part1_4x4_1()
 
     // Corresponding code
     Student::ChessBoard sBoard(4, 4);
-    sBoard.createChessPiece(White, Rook, 3, 2);
-    sBoard.createChessPiece(Black, Bishop, 1, 3);
-    sBoard.createChessPiece(Black, Rook, 1, 1);
-    sBoard.createChessPiece(White, Rook, 2, 3);
+    sBoard.createChessPiece(White, Pawn, 3, 2);
+    // sBoard.createChessPiece(Black, Pawn, 1, 1);
+    std::cout << sBoard.displayBoard().str() << std::endl;
+    // sBoard.createChessPiece(White, Rook, 3, 2);
+    // sBoard.createChessPiece(Black, Bishop, 1, 3);
+    // sBoard.createChessPiece(Black, Rook, 1, 1);
+    // sBoard.createChessPiece(White, Rook, 2, 3);
 
     // Calls isValidMove() from every position to every
     // other position on the chess board for all pieces.

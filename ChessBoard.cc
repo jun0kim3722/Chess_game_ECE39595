@@ -6,6 +6,37 @@
 
 using Student::ChessBoard;
 
+ChessBoard::ChessBoard(int numRow, int numCol) {
+    board.resize(numRow, std::vector<ChessPiece *>(numCol, nullptr));
+    numRows = numRow;
+    numCols = numCol;
+}
+
+void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startColumn) {
+    delete board.at(startRow).at(startColumn);
+
+    if (ty == Pawn) {
+        PawnPiece* newPiece = new PawnPiece(*this, col, startRow, startColumn);
+        board.at(startRow).at(startColumn) = newPiece;
+    }
+    // else if (ty == Roo)
+}
+
+// bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
+
+// }
+
+bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
+    ChessPiece *piece = getPiece(fromRow, fromColumn);
+    return piece -> canMoveToLocation(toRow, toColumn);
+}
+
+// bool ChessBoard::isPieceUnderThreat(int row, int column) {
+
+// }
+
+#include <iostream>
+
 std::ostringstream ChessBoard::displayBoard()
 {
     std::ostringstream outputString;

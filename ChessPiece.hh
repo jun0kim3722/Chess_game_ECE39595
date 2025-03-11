@@ -32,7 +32,7 @@
 
     /**
      * @return
-     * Colour of piece.
+     * Color of piece.
      */
     Color getColor();
 
@@ -44,7 +44,7 @@
      * would have been to define this function as pure virtual and
      * let each derived class override this function.
      */
-    Type getType();
+    virtual Type getType();
 
     /**
      * @return
@@ -90,6 +90,11 @@
      * A unicode representation of the piece.
      */
     virtual const char *toString() = 0;
+
+  private:
+    Color _color;
+    int _row;
+    int _col;
   };
 }
 
