@@ -19,12 +19,28 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
         PawnPiece* newPiece = new PawnPiece(*this, col, startRow, startColumn);
         board.at(startRow).at(startColumn) = newPiece;
     }
-    // else if (ty == Roo)
 }
 
-// bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
+bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
+    if (!isValidMove(fromRow, fromColumn, toRow, toColumn)) return false;
 
-// }
+    // check Turn
+    ChessPiece *piece = getPiece(fromRow, fromColumn);
+    Color move_color = piece -> getColor();
+    if (move_color != turn) return false;
+
+    ChessPiece* temp = getPiece(toRow, toColumn);
+    delete temp; // deleted killed piece
+    
+    // move piece
+    piece -> setPosition(toRow, toColumn);
+    board.at(toRow).at(toColumn) = piece;
+    board.at(fromRow).at(fromColumn) = nullptr;
+
+    turn = turn == White ? Black : White; // update turn
+
+    return true;
+}
 
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
     ChessPiece *piece = getPiece(fromRow, fromColumn);

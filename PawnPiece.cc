@@ -13,19 +13,23 @@ Type get_type() {
 }
 
 void PawnPiece::setPosition(int row, int column) {
+    ChessPiece::setPosition(row, column);
+    
     _row = row;
     _col = column;
+    _num_move += 1;
 }
 
 bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
-    // check if target pos is going off the map
     int max_row = _board.getNumRows();
     int max_col = _board.getNumCols();
     if (toRow >= max_row || toColumn >= max_col
-        || toRow < 0 || toColumn < 0) return false;
+        || toRow < 0 || toColumn < 0) return false; // moveing to off map
+
+    if (_board.getPiece(_row + _forward, _col) != nullptr) return false; // move blocked
 
     if (toRow == _row + _forward * 2 && toColumn == _col) {
-        return (_num_move == 0);
+        return (_num_move == 0 && (_board.getPiece(_row + 2 * _forward, _col) == nullptr));
     }
     else if (toRow == _row + _forward && ((toColumn - _col) * (toColumn - _col)) == 1){
         ChessPiece *piece = _board.getPiece(toRow, toColumn);
