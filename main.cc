@@ -296,6 +296,245 @@ void read_test_file(std::string file_name) {
     }
 }
 
+// };
+// b b 0 1
+// b b 1 1
+// b b 2 1
+// w p 2 0
+void part1_4x4_5 () {
+    Student::ChessBoard sBoard(4, 4);
+    sBoard.createChessPiece(Black, Bishop, 0, 1);
+    sBoard.createChessPiece(Black, Bishop, 1, 1);
+    sBoard.createChessPiece(Black, Bishop, 2, 1);
+    sBoard.createChessPiece(White, Pawn, 2, 0);
+    sBoard.createChessPiece(Black, Pawn, 1, 2);
+    std::cout << sBoard.displayBoard().str() << std::endl;
+    std::cout << "\n(2,1) test" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(1 == sBoard.isValidMove(2,1, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(1 == sBoard.isValidMove(2,1, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(1 == sBoard.isValidMove(2,1, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 3,3))) std::cout<< "Failed16" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,1, 4,4))) std::cout<< "Failed17" << std::endl;
+
+    std::cout << "\n(2,0) test" << std::endl;
+    if (!(1 == sBoard.isValidMove(2,0, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(1 == sBoard.isValidMove(2,0, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(1 == sBoard.isValidMove(2,0, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 3,3))) std::cout<< "Failed16" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,0, 4,4))) std::cout<< "Failed17" << std::endl;
+
+    std::cout << "\n(1,2) test" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(1 == sBoard.isValidMove(1,2, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(1 == sBoard.isValidMove(1,2, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 3,3))) std::cout<< "Failed16" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,2, 4,4))) std::cout<< "Failed17" << std::endl;
+}
+
+// w b 2 2
+// w r 1 0
+// w p 1 1
+// b p 0 1
+
+void part1_4x4_3 () {
+    Student::ChessBoard sBoard(4, 4);
+    sBoard.createChessPiece(White, Bishop, 2, 2);
+    sBoard.createChessPiece(White, Rook, 1, 0);
+    sBoard.createChessPiece(White, Pawn, 1, 1);
+    sBoard.createChessPiece(Black, Pawn, 0, 1);
+    std::cout << sBoard.displayBoard().str() << std::endl;
+    std::cout << "\n(2,2) test" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(1 == sBoard.isValidMove(2,2, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(1 == sBoard.isValidMove(2,2, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(1 == sBoard.isValidMove(2,2, 3,3))) std::cout<< "Failed16" << std::endl;
+
+    std::cout << "\n(1,0) test" << std::endl;
+    if (!(1 == sBoard.isValidMove(1,0, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(1 == sBoard.isValidMove(1,0, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(1 == sBoard.isValidMove(1,0, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 3,3))) std::cout<< "Failed16" << std::endl;
+
+    std::cout << "\n(1,1) test" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,1, 3,3))) std::cout<< "Failed16" << std::endl;
+
+    std::cout << "\n(0,1) test" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(1 == sBoard.isValidMove(0,1, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(0 == sBoard.isValidMove(0,1, 3,3))) std::cout<< "Failed16" << std::endl;
+}
+
+// b p 2 2
+// b r 3 2
+// w p 3 1
+// b p 1 0
+void part1_4x4_7 () {
+    Student::ChessBoard sBoard(4, 4);
+    sBoard.createChessPiece(Black, Pawn, 2, 2);
+    sBoard.createChessPiece(Black, Rook, 3, 2);
+    sBoard.createChessPiece(White, Pawn, 3, 1);
+    sBoard.createChessPiece(Black, Pawn, 1, 0);
+    std::cout << sBoard.displayBoard().str() << std::endl;
+    std::cout << "\n(2,2) test" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(1 == sBoard.isValidMove(2,2, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(0 == sBoard.isValidMove(2,2, 3,3))) std::cout<< "Failed16" << std::endl;
+
+    std::cout << "\n(3,2) test" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(1 == sBoard.isValidMove(3,2, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,2, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(1 == sBoard.isValidMove(3,2, 3,3))) std::cout<< "Failed16" << std::endl;
+
+    std::cout << "\n(3,1) test" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(1 == sBoard.isValidMove(3,1, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(1 == sBoard.isValidMove(3,1, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(1 == sBoard.isValidMove(3,1, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 3,3))) std::cout<< "Failed16" << std::endl;
+
+    std::cout << "\n(1,0) test" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 0,0))) std::cout<< "Failed1" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 0,1))) std::cout<< "Failed2" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 0,2))) std::cout<< "Failed3" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 0,3))) std::cout<< "Failed4" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 1,0))) std::cout<< "Failed5" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 1,2))) std::cout<< "Failed7" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 1,3))) std::cout<< "Failed8" << std::endl;
+    if (!(1 == sBoard.isValidMove(1,0, 2,0))) std::cout<< "Failed9" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 2,1))) std::cout<< "Failed10" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 2,2))) std::cout<< "Failed11" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 2,3))) std::cout<< "Failed12" << std::endl;
+    if (!(1 == sBoard.isValidMove(1,0, 3,0))) std::cout<< "Failed13" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 3,1))) std::cout<< "Failed14" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 3,2))) std::cout<< "Failed15" << std::endl;
+    if (!(0 == sBoard.isValidMove(1,0, 3,3))) std::cout<< "Failed16" << std::endl;
+}
 int main()
 {
     test_part1_4x4_PawnTest_isValid();
@@ -303,5 +542,8 @@ int main()
     test_part1_4x4_BishopTest_isValid();
     test_part1_4x4_PawnTest_movePiece_UnderThreat();
     // read_test_file("part1_4x4_1.txt");
+    part1_4x4_5();
+    part1_4x4_3();
+    part1_4x4_7();
     return EXIT_SUCCESS;
 }
