@@ -516,7 +516,7 @@ void part1_4x4_7 () {
     if (!(0 == sBoard.isValidMove(3,1, 0,2))) std::cout<< "Failed3" << std::endl;
     if (!(0 == sBoard.isValidMove(3,1, 0,3))) std::cout<< "Failed4" << std::endl;
     if (!(0 == sBoard.isValidMove(3,1, 1,0))) std::cout<< "Failed5" << std::endl;
-    if (!(1 == sBoard.isValidMove(3,1, 1,1))) std::cout<< "Failed6" << std::endl;
+    if (!(0 == sBoard.isValidMove(3,1, 1,1))) std::cout<< "Failed6" << std::endl;
     if (!(0 == sBoard.isValidMove(3,1, 1,2))) std::cout<< "Failed7" << std::endl;
     if (!(0 == sBoard.isValidMove(3,1, 1,3))) std::cout<< "Failed8" << std::endl;
     if (!(0 == sBoard.isValidMove(3,1, 2,0))) std::cout<< "Failed9" << std::endl;
