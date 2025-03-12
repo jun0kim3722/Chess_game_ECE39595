@@ -235,6 +235,17 @@ void isValid_scan(Student::ChessBoard& board) {
 
 }
 
+void move_Piece(Student::ChessBoard& board, std::string move_info) {
+    move_info = move_info.substr(10, move_info.size());
+    std::vector<int> move_vec = stringToIntVector(move_info);
+
+    std::cout << "Move from: " << move_vec[0] << ", " << move_vec[1] << " | To: " << move_vec[2] << ", " << move_vec[3] << std::endl;
+    board.movePiece(move_vec[0], move_vec[1], move_vec[2], move_vec[3]);
+    std::cout << board.displayBoard().str() << std::endl;
+    std::cout << "-----------------------------------------------------------" << std::endl;
+
+}
+
 void read_test_file(std::string file_name) {
     std::ifstream f("test_files/" + file_name);
 
@@ -243,7 +254,6 @@ void read_test_file(std::string file_name) {
     std::string s;
 
     while (getline(f, s)) {
-        std::cout << s << std::endl;
         lines.push_back(s);
     }
     f.close();
@@ -256,7 +266,6 @@ void read_test_file(std::string file_name) {
     size_t i = 2;
     for (;lines[i] != "~" and i < lines.size(); i++) {
         std::string piece_info = lines[i];
-        std::cout << piece_info << std::endl;
 
         Color color;
         switch(piece_info[0]) {
@@ -286,11 +295,13 @@ void read_test_file(std::string file_name) {
 
         sBoard.createChessPiece(color, type, piece_info[4] - '0', piece_info[6] - '0');
     }
+    std::cout << sBoard.displayBoard().str() << std::endl;
 
     // task
     for (;i < lines.size(); i++) {
         if (lines[i] == "isValidScan") isValid_scan(sBoard);
         // if (lines[i] == "underThreatScan") isValid_scan(sBoard);
+        if (lines[i].substr(0,9) == "movePiece") move_Piece(sBoard, lines[i]);
         // case "underThreatScan":
                 // break;
     }
@@ -537,13 +548,13 @@ void part1_4x4_7 () {
 }
 int main()
 {
-    test_part1_4x4_PawnTest_isValid();
-    test_part1_4x4_RookTest_isValid();
-    test_part1_4x4_BishopTest_isValid();
-    test_part1_4x4_PawnTest_movePiece_UnderThreat();
-    // read_test_file("part1_4x4_1.txt");
-    part1_4x4_5();
-    part1_4x4_3();
-    part1_4x4_7();
+    // test_part1_4x4_PawnTest_isValid();
+    // test_part1_4x4_RookTest_isValid();
+    // test_part1_4x4_BishopTest_isValid();
+    // test_part1_4x4_PawnTest_movePiece_UnderThreat();
+    read_test_file("part2_4x4_5.txt");
+    // part1_4x4_5();
+    // part1_4x4_3();
+    // part1_4x4_7();
     return EXIT_SUCCESS;
 }

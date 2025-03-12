@@ -44,7 +44,8 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
         if (toRow == _row + _forward * 2 && toColumn == _col) {
             int move2 = _row + 2 * _forward;
             bool is_double_row = _row == (_color == White ? max_row - 2 : 1);
-            return (_num_move == 0 && is_double_row && move2 >= 0 && move2 < max_row && _board.getPiece(_row + 2 * _forward, _col) == nullptr);
+            return (is_double_row && move2 >= 0 && move2 < max_row && _board.getPiece(_row + 2 * _forward, _col) == nullptr);
+            // return (_num_move == 0 && is_double_row && move2 >= 0 && move2 < max_row && _board.getPiece(_row + 2 * _forward, _col) == nullptr);
         }
         else {
             return (toRow == _row + _forward && toColumn == _col);
