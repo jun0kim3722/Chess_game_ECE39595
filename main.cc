@@ -232,6 +232,31 @@ void isValid_scan(Student::ChessBoard& board) {
     int max_row = board.getNumRows();
     int max_col = board.getNumCols();
 
+    std::vector<std::pair<int, int>> piece_vec;
+    for (int r = 0; r < max_row; r++) {
+        for (int c = 0; c < max_col; c++) {
+            Student::ChessPiece *piece = board.getPiece(r,c);
+            if (piece != nullptr) piece_vec.push_back(std::make_pair(r, c));
+        }
+    }
+
+    std::cout << std::boolalpha;
+    for (std::pair<int, int> pos : piece_vec) {
+        Student::ChessPiece *piece = board.getPiece(pos.first, pos.second);
+        std::cout << "Move: " << pos.first << "," << pos.second
+            << " " << piece -> toString() << "--" << std::endl;
+        
+        for (int r = 0; r < max_row; r++) {
+            for (int c = 0; c < max_col; c++) {
+                bool is_valid = board.isValidMove(pos.first, pos.second, r, c);
+                if (is_valid) {
+                    std::cout << pos.first << ", " << pos.second
+                    << " -> " << r << ", " << c << " | " << is_valid << std::endl;
+                }
+            }
+        }
+    }
+    std::cout << std::noboolalpha;
 
 }
 
