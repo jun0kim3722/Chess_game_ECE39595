@@ -39,11 +39,11 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
     }
     else {
         int move1 = _row + _forward;
-        if (move1 > 0 && move1 < max_row && _board.getPiece(_row + _forward, _col) != nullptr) return false; // move blocked
+        if (move1 >= 0 && move1 < max_row && _board.getPiece(_row + _forward, _col) != nullptr) return false; // move blocked
 
         if (toRow == _row + _forward * 2 && toColumn == _col) {
             int move2 = _row + 2 * _forward;
-            return (_num_move == 0 && move2 > 0 && move2 < max_row && _board.getPiece(_row + 2 * _forward, _col) == nullptr);
+            return (_num_move == 0 && move2 >= 0 && move2 < max_row && _board.getPiece(_row + 2 * _forward, _col) == nullptr);
         }
         else {
             return (toRow == _row + _forward && toColumn == _col);

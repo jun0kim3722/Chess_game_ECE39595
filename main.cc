@@ -3,6 +3,7 @@
 #include "ChessBoard.hh"
 #include "ChessPiece.hh"
 #include <iostream>
+#include <fstream>
 
 void test_part1_4x4_PawnTest_isValid()
 {
@@ -22,11 +23,11 @@ void test_part1_4x4_PawnTest_isValid()
     Student::ChessBoard sBoard(4, 4);
     std::cout << "\nPawn White Test--" << std::endl;
     sBoard.createChessPiece(White, Pawn, 2, 2);
-    if (!(1 == sBoard.isValidMove(2,2, 1,2))) std::cout<< "Failed" << std::endl; // move 1 up
-    if (!(1 == sBoard.isValidMove(2,2, 0,2))) std::cout<< "Failed" << std::endl; // move 2 up
-    if (!(0 == sBoard.isValidMove(2,2, 1,3))) std::cout<< "Failed" << std::endl; // move dig up
-    if (!(0 == sBoard.isValidMove(2,2, 1,1))) std::cout<< "Failed" << std::endl; // move dig up
-    if (!(0 == sBoard.isValidMove(2,2, 2,0))) std::cout<< "Failed" << std::endl; // move side
+    if (!(1 == sBoard.isValidMove(2,2, 1,2))) std::cout<< "Failed1" << std::endl; // move 1 up
+    if (!(1 == sBoard.isValidMove(2,2, 0,2))) std::cout<< "Failed2" << std::endl; // move 2 up
+    if (!(0 == sBoard.isValidMove(2,2, 1,3))) std::cout<< "Failed3" << std::endl; // move dig up
+    if (!(0 == sBoard.isValidMove(2,2, 1,1))) std::cout<< "Failed4" << std::endl; // move dig up
+    if (!(0 == sBoard.isValidMove(2,2, 2,0))) std::cout<< "Failed5" << std::endl; // move side
 
     
     std::cout << "\nPawn Black Test--" << std::endl;
@@ -208,7 +209,95 @@ void test_part1_4x4_PawnTest_movePiece_UnderThreat()
 
 
     return;
-};
+}
+
+std::vector<int> stringToIntVector(const std::string& input) {
+    std::vector<int> result;
+    std::stringstream ss(input);
+    int num;
+    while (ss >> num) {
+        result.push_back(num);
+        if (ss.peek() == ' ') { // Check for space, and consume it.
+            ss.ignore();
+        }
+    }
+    if(ss.fail() && !ss.eof()){
+        throw std::invalid_argument("Invalid input string");
+    }
+    return result;
+}
+
+// void isValid_scan() {
+
+// }
+
+// void read_test_file(std::string file_name) {
+//     std::ifstream f("test_files/" + file_name);
+
+//     // String variable to store the read data
+//     std::vector<std::string> lines;
+//     std::string s;
+
+//     while (getline(f, s)) {
+//         std::cout << s << std::endl;
+//         lines.push_back(s);
+//     }
+//     f.close();
+
+//     // add Pieces
+//     std::string board_size_str = lines[1];
+//     std::vector<int> board_size  = stringToIntVector(lines[1]);
+//     Student::ChessBoard sBoard(board_size[0], board_size[1]);
+
+//     size_t i = 2;
+//     for (lines[i] != "~" and i < lines.size(); i++) {
+//         std::string piece_info = lines[i];
+//         std::cout << piece_info << std::endl;
+
+//         Color color;
+//         switch(piece_info[0]) {
+//             case 'w':
+//                 color = White;
+//                 break;
+//             case 'b':
+//                 color = Black;
+//                 break;
+//         }
+
+//         Type type;
+//         switch(piece_info[2]) {
+//             case 'p':
+//                 type = Pawn;
+//                 break;
+//             case 'r':
+//                 type = Rook;
+//                 break;
+//             case 'b':
+//                 type = Bishop;
+//                 break;
+//             case 'k':
+//                 type = King;
+//                 break;
+//         }
+
+//         sBoard.createChessPiece(color, type, piece_info[4] - '0', piece_info[6] - '0');
+//     }
+
+//     // task
+//     for (i < lines.size(); i++) {
+//         switch(lines[i]) {
+//             case 'isValidScan':
+
+//                 break;
+//             case 'underThreatScan':
+//                 break;
+//             case 'b':
+//                 break;
+//             case 'k':
+//                 break;
+//         }
+//     }
+// }
 
 int main()
 {
@@ -216,5 +305,6 @@ int main()
     test_part1_4x4_RookTest_isValid();
     test_part1_4x4_BishopTest_isValid();
     test_part1_4x4_PawnTest_movePiece_UnderThreat();
+    // read_test_file("part1_4x4_1.txt");
     return EXIT_SUCCESS;
 }
