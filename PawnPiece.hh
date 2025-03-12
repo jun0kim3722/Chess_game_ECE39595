@@ -13,7 +13,6 @@ namespace Student
     {
     public:
         PawnPiece(ChessBoard &board, Color color, int row, int column);
-    // : ChessPiece(board, color, row, column), _board(board), _color(color), _row(row), _col(column) {};
 
         Type get_type();
 

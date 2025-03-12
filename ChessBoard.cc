@@ -61,11 +61,20 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
     return piece -> canMoveToLocation(toRow, toColumn);
 }
 
-// bool ChessBoard::isPieceUnderThreat(int row, int column) {
+bool ChessBoard::isPieceUnderThreat(int row, int column) {
+    ChessPiece *piece = getPiece(row, column);
+    if (piece == nullptr) return false;
 
-// }
+    Color tar_color = piece -> getColor();
+    for (std::vector<ChessPiece *> r_board : board) {
+        for (ChessPiece *opp : r_board) {
+            if (opp != nullptr && opp -> getColor() != tar_color &&
+                opp -> canMoveToLocation(row, column)) return true;
+        }
+    }
+    return false;
+}
 
-#include <iostream>
 
 std::ostringstream ChessBoard::displayBoard()
 {

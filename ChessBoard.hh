@@ -36,6 +36,14 @@ namespace Student
          */
         ChessBoard(int numRow, int numCol);
 
+        ~ChessBoard() {
+            for (std::vector<ChessPiece *> r_board : board) {
+                for (ChessPiece *opp : r_board) {
+                    delete opp;
+                }
+            }
+        }
+
         /**
          * @return
          * Number of rows in chess board.

@@ -26,12 +26,7 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
     if (toRow >= max_row || toColumn >= max_col
         || toRow < 0 || toColumn < 0) return false; // moveing to off map
 
-    if (_board.getPiece(_row + _forward, _col) != nullptr) return false; // move blocked
-
-    if (toRow == _row + _forward * 2 && toColumn == _col) {
-        return (_num_move == 0 && (_board.getPiece(_row + 2 * _forward, _col) == nullptr));
-    }
-    else if (toRow == _row + _forward && ((toColumn - _col) * (toColumn - _col)) == 1){
+    if (toRow == _row + _forward && abs(toColumn - _col) == 1){
         ChessPiece *piece = _board.getPiece(toRow, toColumn);
         
         if (piece != nullptr) {
@@ -43,7 +38,16 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
         }
     }
     else {
-        return (toRow == _row + _forward && toColumn == _col);
+        int move1 = _row + _forward;
+        if (move1 > 0 && move1 < max_row && _board.getPiece(_row + _forward, _col) != nullptr) return false; // move blocked
+
+        if (toRow == _row + _forward * 2 && toColumn == _col) {
+            int move2 = _row + 2 * _forward;
+            return (_num_move == 0 && move2 > 0 && move2 < max_row && _board.getPiece(_row + 2 * _forward, _col) == nullptr);
+        }
+        else {
+            return (toRow == _row + _forward && toColumn == _col);
+        }
     }
 }
 
