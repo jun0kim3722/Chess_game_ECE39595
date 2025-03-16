@@ -58,6 +58,10 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
 // if the King is under threat after the move
 // if so, return false
 
+bool ChessBoard::KingSafety() {
+    
+}
+
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
     ChessPiece *piece = getPiece(fromRow, fromColumn);
     
