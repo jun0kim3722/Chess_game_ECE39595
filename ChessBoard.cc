@@ -54,6 +54,7 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     return true;
 }
 
+// need to consider isPieceUnderThreat during isValidMove function because of King
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
     ChessPiece *piece = getPiece(fromRow, fromColumn);
     
