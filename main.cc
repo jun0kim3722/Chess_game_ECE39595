@@ -571,15 +571,38 @@ void part1_4x4_7 () {
     if (!(0 == sBoard.isValidMove(1,0, 3,2))) std::cout<< "Failed15" << std::endl;
     if (!(0 == sBoard.isValidMove(1,0, 3,3))) std::cout<< "Failed16" << std::endl;
 }
+
+// 4 4
+// w r 3 2
+// b b 1 3
+// b r 1 1
+// w r 2 3
+// b k 0 0
+// w k 3 0
+// ~
+
+void part3_basic_test () {
+    Student::ChessBoard sBoard(4, 4);
+    sBoard.createChessPiece(White, Rook, 3, 2);
+    sBoard.createChessPiece(Black, Bishop, 1, 3);
+    sBoard.createChessPiece(Black, Rook, 1, 1);
+    sBoard.createChessPiece(White, Rook, 2, 3);
+    sBoard.createChessPiece(Black, King, 0, 0);
+    sBoard.createChessPiece(White, King, 3, 0);
+    std::cout << "Initial Board:" << std::endl;
+    std::cout << sBoard.displayBoard().str() << std::endl;
+}
 int main()
 {
     // test_part1_4x4_PawnTest_isValid();
     // test_part1_4x4_RookTest_isValid();
     // test_part1_4x4_BishopTest_isValid();
     // test_part1_4x4_PawnTest_movePiece_UnderThreat();
-    read_test_file("part2_4x4_5.txt");
+    // read_test_file("part2_4x4_5.txt");
     // part1_4x4_5();
     // part1_4x4_3();
     // part1_4x4_7();
+    // part3_basic_test();
+    read_test_file("part3_4x4_1.txt");
     return EXIT_SUCCESS;
 }

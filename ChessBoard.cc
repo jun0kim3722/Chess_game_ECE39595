@@ -27,10 +27,10 @@ void ChessBoard::createChessPiece(Color col, Type ty, int startRow, int startCol
         BishopPiece* newPiece = new BishopPiece(*this, col, startRow, startColumn);
         board.at(startRow).at(startColumn) = newPiece;
     }
-    // else if (ty == King) {
-    //     KingPiece* newPiece = new KingPiece(*this, col, startRow, startColumn);
-    //     board.at(startRow).at(startColumn) = newPiece;
-    // }
+    else if (ty == King) {
+        KingPiece* newPiece = new KingPiece(*this, col, startRow, startColumn);
+        board.at(startRow).at(startColumn) = newPiece;
+    }
 }
 
 bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
