@@ -325,8 +325,8 @@ void read_test_file(std::string file_name) {
     // task
     for (;i < lines.size(); i++) {
         if (lines[i] == "isValidScan") isValid_scan(sBoard);
-        // if (lines[i] == "underThreatScan") isValid_scan(sBoard);
-        // if (lines[i].substr(0,9) == "movePiece") move_Piece(sBoard, lines[i]);
+        if (lines[i] == "underThreatScan") isValid_scan(sBoard);
+        if (lines[i].substr(0,9) == "movePiece") move_Piece(sBoard, lines[i]);
         // case "underThreatScan":
                 // break;
     }
@@ -604,7 +604,7 @@ int main()
     // part1_4x4_5();
     // part1_4x4_3();
     // part1_4x4_7();
-    part3_basic_test();
-    // read_test_file("part3_4x4_1.txt");
+    // part3_basic_test();
+    read_test_file("part3_4x4_1.txt");
     return EXIT_SUCCESS;
 }
