@@ -592,7 +592,10 @@ void part3_basic_test () {
     std::cout << "Initial Board:" << std::endl;
     std::cout << sBoard.displayBoard().str() << std::endl;
     if (!(0 == sBoard.isValidMove(3,0, 3,1))) std::cout<< "Failed1" << std::endl;
-    if (!(0 == sBoard.isValidMove(1,3, 0,2))) std::cout<< "Failed2" << std::endl;
+    if (!(1 == sBoard.isValidMove(1,3, 0,2))) std::cout<< "Failed2" << std::endl;
+    sBoard.movePiece(3,0, 2,0);
+    sBoard.movePiece(1,3, 0,2);
+    sBoard.isValidScan();
 }
 int main()
 {

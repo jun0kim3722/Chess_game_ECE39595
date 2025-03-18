@@ -3,6 +3,7 @@
 #include "RookPiece.hh"
 #include "BishopPiece.hh"
 #include "KingPiece.hh"
+#include <iostream>
 
 using Student::ChessBoard;
 
@@ -57,22 +58,58 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
 // need to chagne isValidMove function to check
 // if the King is under threat after the move
 
-bool ChessBoard::KingSafety(int toRow, int toColumn, Color kingColor) {
+bool ChessBoard::KingSafety(int toRow, int toCol, Color kingColor) {
+    int currRow = -1, currCol = -1;
+    ChessPiece* kingPiece = nullptr;
+
     for (int row = 0; row < numRows; row++) {
         for (int col = 0; col < numCols; col++) {
             ChessPiece *piece = getPiece(row, col);
+            if (piece != nullptr && piece->getType() == King && piece->getColor() == kingColor) {
+                currRow = row;
+                currCol = col;
+                kingPiece = piece;
+            }
+        }
+    }
 
+    if (toRow >= 0 && toCol >= 0) {
+        currRow = toRow;
+        currCol = toCol;
+    }
+
+    for (int row = 0; row < numRows; row++) {
+        for (int col = 0; col < numCols; col++) {
+            ChessPiece *piece = getPiece(row, col);
             if (piece != nullptr && piece->getColor() != kingColor) {
-                if (piece->canMoveToLocation(toRow, toColumn)) {
+                if (piece->canMoveToLocation(currRow, currCol)) {
                     return false;
                 }
             }
         }
     }
+
+    int kingMoves[8][2] = {
+        {-1, 0}, {1, 0}, {0, -1}, {0, 1},
+        {-1, -1}, {1, -1}, {-1, 1}, {1, 1}
+    };
+
+    for (int i = 0; i < 8; i++) {
+        int newRow = currRow + kingMoves[i][0];
+        int newCol = currCol + kingMoves[i][1];
+
+        if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols) {
+            ChessPiece* adjacentPiece = getPiece(newRow, newCol);
+            if (adjacentPiece != nullptr && adjacentPiece->getType() == King && adjacentPiece->getColor() != kingColor) {
+                return false;
+            }
+        }
+    }
+
     return true;
 }
 
-// need to return both canMoveToLocation and KingSafety
+// need to check both canMoveToLocation and KingSafety
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
     ChessPiece *piece = getPiece(fromRow, fromColumn);
     
@@ -144,3 +181,28 @@ std::ostringstream ChessBoard::displayBoard()
 
     return outputString;
 }
+
+bool ChessBoard::isValidScan() {
+    for (int row = 0; row < numRows; row++) {
+        for (int col = 0; col < numCols; col++) {
+            ChessPiece* piece = getPiece(row, col);
+            if (piece != nullptr) {
+                std::cout << "\nChecking " << "(" << row << "," << col << ")...\n";
+
+                for (int targetRow = 0; targetRow < numRows; targetRow++) {
+                    for (int targetCol = 0; targetCol < numCols; targetCol++) {
+                        if (isValidMove(row, col, targetRow, targetCol)) {
+                            std::cout << "can move to (" 
+                                      << targetRow << "," << targetCol << ")\n";
+                        } else {
+                            std::cout << "cannot move to (" 
+                                      << targetRow << "," << targetCol << ")\n";
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+
