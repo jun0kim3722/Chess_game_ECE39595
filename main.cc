@@ -595,6 +595,9 @@ void part3_basic_test () {
     if (!(1 == sBoard.isValidMove(1,3, 0,2))) std::cout<< "Failed2" << std::endl;
     sBoard.movePiece(3,0, 2,0);
     sBoard.movePiece(1,3, 0,2);
+    // sBoard.isValidScan();
+    sBoard.movePiece(2,3, 1,3);
+    sBoard.movePiece(1,1, 0,1);
     sBoard.isValidScan();
 }
 int main()
