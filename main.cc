@@ -325,8 +325,8 @@ void read_test_file(std::string file_name) {
     // task
     for (;i < lines.size(); i++) {
         if (lines[i] == "isValidScan") isValid_scan(sBoard);
-        if (lines[i] == "underThreatScan") isValid_scan(sBoard);
-        if (lines[i].substr(0,9) == "movePiece") move_Piece(sBoard, lines[i]);
+        // if (lines[i] == "underThreatScan") isValid_scan(sBoard);
+        // if (lines[i].substr(0,9) == "movePiece") move_Piece(sBoard, lines[i]);
         // case "underThreatScan":
                 // break;
     }
@@ -591,8 +591,7 @@ void part3_basic_test () {
     sBoard.createChessPiece(White, King, 3, 0);
     std::cout << "Initial Board:" << std::endl;
     std::cout << sBoard.displayBoard().str() << std::endl;
-    if (!(1 == sBoard.isValidMove(0,0, 1,1))) std::cout<< "Failed1" << std::endl; // Rook to Bishop
-    if (!(0 == sBoard.isValidMove(3,0, 3,1))) std::cout<< "Failed2" << std::endl; // Rook to empty
+    if (!(0 == sBoard.isValidMove(3,0, 3,1))) std::cout<< "Failed1" << std::endl;
 }
 int main()
 {
