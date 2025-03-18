@@ -57,14 +57,32 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
 // need to chagne isValidMove function to check
 // if the King is under threat after the move
 
-bool ChessBoard::KingSafety(int toRow, int toColumn, Color kingColor) {
+bool ChessBoard::Safety(int toRow, int toColumn, Color pieceColor) {
     for (int row = 0; row < numRows; row++) {
         for (int col = 0; col < numCols; col++) {
             ChessPiece *piece = getPiece(row, col);
 
-            if (piece != nullptr && piece->getColor() != kingColor) {
-                if (piece->canMoveToLocation(toRow, toColumn)) {
-                    return false;
+            if (piece != nullptr && piece->getColor() != pieceColor) {
+                if (piece->getType() == Pawn) {
+                    int direction = (piece->getColor() == White) ? -1 : 1;
+                    if ((row + direction == toRow) && (col - 1 == toColumn || col + 1 == toColumn)) {
+                        return false;
+                    }
+                }
+                else if (piece->getType() == Rook) {
+                    if (row == toRow || col == toColumn) {
+                        return false;
+                    }
+                }
+                else if (piece->getType() == Bishop) {
+                    if (abs(row - toRow) == abs(col - toColumn)) {
+                        return false;
+                    }
+                }
+                else if (piece->getType() == King) {
+                    if (abs(row - toRow) <= 1 && abs(col - toColumn) <= 1) {
+                        return false;
+                    }
                 }
             }
         }
@@ -72,21 +90,23 @@ bool ChessBoard::KingSafety(int toRow, int toColumn, Color kingColor) {
     return true;
 }
 
-// need to return both canMoveToLocation and KingSafety
+
+// need to return both canMoveToLocation and Safety
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
     ChessPiece *piece = getPiece(fromRow, fromColumn);
     
     if (piece == nullptr) return false;
-
     if (!piece->canMoveToLocation(toRow, toColumn)) {
         return false;
     }
-
-    if (piece->getType() == King && !KingSafety(toRow, toColumn, piece->getColor())) {
+    if (!Safety(toRow, toColumn, piece->getColor())) {
         return false;
     }
     return true;
 }
+
+
+
 
 
 bool ChessBoard::isPieceUnderThreat(int row, int column) {
