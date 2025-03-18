@@ -72,51 +72,6 @@ bool ChessBoard::KingSafety(int toRow, int toColumn, Color kingColor) {
     return true;
 }
 
-bool ChessBoard::PawnSafety(int toRow, int toColumn, Color pawnColor) {
-    for (int row = 0; row < numRows; row++) {
-        for (int col = 0; col < numCols; col++) {
-            ChessPiece *piece = getPiece(row, col);
-
-            if (piece != nullptr && piece->getColor() != pawnColor) {
-                if (piece->canMoveToLocation(toRow, toColumn)) {
-                    return false;
-                }
-            }
-        }
-    }
-    return true;
-}
-
-bool ChessBoard::RookSafety(int toRow, int toColumn, Color rookColor) {
-    for (int row = 0; row < numRows; row++) {
-        for (int col = 0; col < numCols; col++) {
-            ChessPiece *piece = getPiece(row, col);
-
-            if (piece != nullptr && piece->getColor() != rookColor) {
-                if (piece->canMoveToLocation(toRow, toColumn)) {
-                    return false;
-                }
-            }
-        }
-    }
-    return true;
-}
-
-bool ChessBoard::BishopSafety(int toRow, int toColumn, Color bishopColor) {
-    for (int row = 0; row < numRows; row++) {
-        for (int col = 0; col < numCols; col++) {
-            ChessPiece *piece = getPiece(row, col);
-
-            if (piece != nullptr && piece->getColor() != bishopColor) {
-                if (piece->canMoveToLocation(toRow, toColumn)) {
-                    return false;
-                }
-            }
-        }
-    }
-    return true;
-}
-
 // need to return both canMoveToLocation and KingSafety
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
     ChessPiece *piece = getPiece(fromRow, fromColumn);
@@ -128,15 +83,6 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
     }
 
     if (piece->getType() == King && !KingSafety(toRow, toColumn, piece->getColor())) {
-        return false;
-    }
-    if (piece->getType() == Pawn && !PawnSafety(toRow, toColumn, piece->getColor())) {
-        return false;
-    }
-    if (piece->getType() == Rook && !RookSafety(toRow, toColumn, piece->getColor())) {
-        return false;
-    }
-    if (piece->getType() == Bishop && !BishopSafety(toRow, toColumn, piece->getColor())) {
         return false;
     }
     return true;
