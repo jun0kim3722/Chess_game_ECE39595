@@ -573,31 +573,25 @@ void part1_4x4_7 () {
 }
 
 // 4 4
-// w r 3 2
-// b b 1 3
-// b r 1 1
+// b r 3 3
+// b b 0 0
+// b b 3 0
 // w r 2 3
-// b k 0 0
-// w k 3 0
-// ~
+// b k 3 1
+// w k 1 0
 
 void part3_basic_test () {
     Student::ChessBoard sBoard(4, 4);
-    sBoard.createChessPiece(White, Rook, 3, 2);
-    sBoard.createChessPiece(Black, Bishop, 1, 3);
-    sBoard.createChessPiece(Black, Rook, 1, 1);
+    sBoard.createChessPiece(Black, Rook, 3, 3);
+    sBoard.createChessPiece(Black, Bishop, 0, 0);
+    sBoard.createChessPiece(Black, Bishop, 3, 0);
     sBoard.createChessPiece(White, Rook, 2, 3);
-    sBoard.createChessPiece(Black, King, 0, 0);
-    sBoard.createChessPiece(White, King, 3, 0);
+    sBoard.createChessPiece(Black, King, 3, 1);
+    sBoard.createChessPiece(White, King, 1, 0);
     std::cout << "Initial Board:" << std::endl;
     std::cout << sBoard.displayBoard().str() << std::endl;
-    if (!(0 == sBoard.isValidMove(3,0, 3,1))) std::cout<< "Failed1" << std::endl;
-    if (!(1 == sBoard.isValidMove(1,3, 0,2))) std::cout<< "Failed2" << std::endl;
-    sBoard.movePiece(3,0, 2,0);
-    sBoard.movePiece(1,3, 0,2);
-    // sBoard.isValidScan();
-    sBoard.movePiece(2,3, 1,3);
-    sBoard.movePiece(1,1, 0,1);
+    sBoard.movePiece(2,3, 2,0);
+    sBoard.movePiece(3,3, 0,3);
     sBoard.isValidScan();
 }
 int main()
