@@ -139,6 +139,9 @@ namespace Student
         std::ostringstream displayBoard();
 
         bool KingSafety(int toRow, int toColumn, Color color);
+        bool PawnSafety(int toRow, int toColumn, Color color);
+        bool RookSafety(int toRow, int toColumn, Color color);
+        bool BishopSafety(int toRow, int toColumn, Color color);
     };
 }
 
