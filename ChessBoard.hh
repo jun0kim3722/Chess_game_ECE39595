@@ -7,6 +7,9 @@
 #include <vector>
 #include <sstream>
 
+// #include <iostream>
+
+
 namespace Student
 {
     class ChessBoard
@@ -15,6 +18,7 @@ namespace Student
         int numRows = 0;
         int numCols = 0;
         Color turn = White;
+
         /**
          * @brief
          * A 2D vector of pointers to ChessPiece objects.
@@ -35,6 +39,18 @@ namespace Student
          * Number of columns of the chessboard
          */
         ChessBoard(int numRow, int numCol);
+
+        // void check() {
+        //     for (int row = 0; row < numRows; row++) {
+        //         for (int col = 0; col < numCols; col++) {
+        //             ChessPiece *piece = getPiece(row, col);
+        //             if (piece == nullptr) continue;
+        //             if (row != piece->getRow() || col != piece->getColumn()) {
+        //                 std::cout << "Wrong Pose: " << piece->toString() << row << piece->getRow() << " | " << col << piece->getColumn()<<std::endl;
+        //             }
+        //         }
+        //     }
+        // }
 
         ~ChessBoard() {
             for (std::vector<ChessPiece *> r_board : board) {
@@ -137,6 +153,8 @@ namespace Student
          * An output stream containing the full board layout.
          */
         std::ostringstream displayBoard();
+
+        bool isCheckMate(Color color);
 
         bool KingSafety(int row, int column, Color color);
         bool isValidScan();

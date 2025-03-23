@@ -45,5 +45,5 @@ bool BishopPiece::canMoveToLocation(int toRow, int toCol)
 
 const char *BishopPiece::toString()
 {
-    return (getColor() == White) ? u8"\u2657" : u8"\u265D";
+    return (getColor() == Black) ? u8"\u2657" : u8"\u265D";
 }

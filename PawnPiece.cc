@@ -5,7 +5,7 @@ using Student::PawnPiece;
 
 PawnPiece::PawnPiece(ChessBoard &board, Color color, int row, int column)
         : ChessPiece(board, color, row, column), _row(row), _col(column), _num_move(0), _board(board), _color(color) {
-            _forward = color == White ? -1 : 1;
+            _forward = (color == White) ? -1 : 1;
         }
 
 Type get_type() {

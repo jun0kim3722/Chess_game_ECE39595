@@ -37,5 +37,5 @@ bool KingPiece::canMoveToLocation(int toRow, int toCol)
 
 const char *KingPiece::toString()
 {
-    return (getColor() == White) ? u8"\u2654" : u8"\u265A";
+    return (getColor() == Black) ? u8"\u2654" : u8"\u265A";
 }

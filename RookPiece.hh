@@ -13,8 +13,11 @@ namespace Student
     {
         public:
             RookPiece(ChessBoard &board, Color color, int row, int col);
+
             Type getType();
+
             bool canMoveToLocation(int toRow, int toCol);
+
             const char *toString();
         private:
             int _row;
