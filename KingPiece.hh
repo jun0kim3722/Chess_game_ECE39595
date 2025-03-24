@@ -16,7 +16,13 @@ namespace Student
 
             Type getType();
 
+            bool isCheckMate();
+
+            bool isCastling(int toRow, int toCol);
+
             bool canMoveToLocation(int toRow, int toCol);
+
+            void setPosition(int row, int column);
 
             const char *toString();
 
@@ -25,6 +31,7 @@ namespace Student
             int _col;
             ChessBoard &_board;
             Color _color;
+            int _num_move = 0;
     };
 }
 

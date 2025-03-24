@@ -18,12 +18,17 @@ namespace Student
 
             bool canMoveToLocation(int toRow, int toCol);
 
+            int getNumMoves();
+
+            void setPosition(int row, int column);
+
             const char *toString();
         private:
             int _row;
             int _col;
             ChessBoard &_board;
             Color _color;
+            int _num_move = 0;
     };
 }
 

@@ -91,6 +91,10 @@
      */
     virtual const char *toString() = 0;
 
+    virtual int getNumMoves() {
+      return -1;
+    };
+
   private:
     Color _color;
     int _row;

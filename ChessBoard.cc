@@ -4,6 +4,9 @@
 #include "BishopPiece.hh"
 #include "KingPiece.hh"
 
+#include <iostream>
+
+
 using Student::ChessBoard;
 
 ChessBoard::ChessBoard(int numRow, int numCol) {
@@ -49,6 +52,28 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     board.at(toRow).at(toColumn) = piece;
     board.at(fromRow).at(fromColumn) = nullptr;
 
+    // check castling
+    int rowMag = abs(toRow - fromRow);
+    int colMag = abs(toColumn - fromColumn);
+    if (piece -> getType() == King && (rowMag == 2 || colMag == 2)) {
+        int vec[2] = {(rowMag != 0) ? (toRow - fromRow) / rowMag : 0, (rowMag != 0) ? (toColumn - fromColumn) / colMag : 0};
+        int rook_pos[2] = {fromRow + vec[0], fromColumn + vec[1]};
+        while (rook_pos[0] < numRows && rook_pos[1] < numCols) {
+            std::cout << rook_pos[0] << rook_pos[1] << std::endl;
+            ChessPiece *rook = getPiece(rook_pos[0], rook_pos[1]);
+            if (rook != nullptr) {
+                // move Rook in correct place
+                int new_pos[2] = {fromRow + vec[0], fromColumn + vec[1]};
+                rook -> setPosition(new_pos[0], new_pos[1]);
+                board.at(rook_pos[0]).at(rook_pos[1]) = nullptr;
+                board.at(new_pos[0]).at(new_pos[1]) = rook;
+                break;
+            }
+        }
+        rook_pos[0] += vec[0];
+        rook_pos[1] += vec[1];
+    }
+
     turn = turn == White ? Black : White; // update turn
 
     return true;
@@ -57,9 +82,6 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
 #include <iostream>
 bool ChessBoard::isCheckMate(Color kingColor) {
     int currRow = -1, currCol = -1;
-    // for (int row = 0; row < numRows; row++) {
-    //     for (int col = 0; col < numCols; col++) {
-        // ChessPiece *piece = getPiece(row, col);
     for (std::vector<ChessPiece *> row_board : board) {
         for (ChessPiece *piece : row_board) {
             if (piece != nullptr && piece->getType() == King && piece->getColor() == kingColor) {
@@ -74,64 +96,6 @@ bool ChessBoard::isCheckMate(Color kingColor) {
     return isPieceUnderThreat(currRow, currCol);
 }
 
-// need to chagne isValidMove function to check
-// if the King is under threat after the move
-bool ChessBoard::KingSafety(int toRow, int toCol, Color kingColor) {
-    // find king
-    int currRow = -1, currCol = -1;
-    ChessPiece* kingPiece = nullptr;
-    for (int row = 0; row < numRows; row++) {
-        for (int col = 0; col < numCols; col++) {
-            ChessPiece *piece = getPiece(row, col);
-            if (piece != nullptr && piece->getType() == King && piece->getColor() == kingColor) {
-                currRow = row;
-                currCol = col;
-                kingPiece = piece;
-            }
-        }
-    }
-
-    if (kingPiece == nullptr) return true;
-
-    if (toRow >= 0 && toCol >= 0) {
-        // why do you find king's position if you gonna overwrite anyway?
-        currRow = toRow;
-        currCol = toCol;
-    }
-
-    // check if king under threat
-    for (int row = 0; row < numRows; row++) {
-        for (int col = 0; col < numCols; col++) {
-            ChessPiece *piece = getPiece(row, col);
-            if (piece != nullptr && piece->getColor() != kingColor) {
-                if (piece->canMoveToLocation(currRow, currCol)) {
-                    return false;
-                }
-            }
-        }
-    }
-
-    int kingMoves[8][2] = {
-        {-1, 0}, {1, 0}, {0, -1}, {0, 1},
-        {-1, -1}, {1, -1}, {-1, 1}, {1, 1}
-    };
-
-    for (int i = 0; i < 8; i++) {
-        int newRow = currRow + kingMoves[i][0];
-        int newCol = currCol + kingMoves[i][1];
-
-        // what does this do???
-        if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols) {
-            ChessPiece* adjacentPiece = getPiece(newRow, newCol);
-            if (adjacentPiece != nullptr && adjacentPiece->getType() == King && adjacentPiece->getColor() != kingColor) {
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
 bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
     ChessPiece *piece = getPiece(fromRow, fromColumn);
     if (piece == nullptr) return false;
@@ -144,68 +108,56 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
         board.at(toRow).at(toColumn) = piece;
         board.at(fromRow).at(fromColumn) = nullptr;
 
-        // std::cout << this -> displayBoard().str();
-        
+        // check castling
+        bool isCastling = false;
+        ChessPiece *rook;
+        int rook_pos[2];
+        int new_pos[2];
+
+        int rowMag = abs(toRow - fromRow);
+        int colMag = abs(toColumn - fromColumn);
+        if (piece -> getType() == King && (rowMag == 2 || colMag == 2)) {
+            isCastling = true;
+            int vec[2] = {(rowMag != 0) ? (toRow - fromRow) / rowMag : 0, (colMag != 0) ? (toColumn - fromColumn) / colMag : 0};
+            rook_pos[0] = fromRow + vec[0];
+            rook_pos[1] = fromColumn + vec[1];
+            while (rook_pos[0] < numRows && rook_pos[1] < numCols) {
+                std::cout << rook_pos[0] << rook_pos[1] << rowMag << colMag << std::endl;
+                // std::cout << rook_pos[0] << rook_pos[1] << vec[0] << vec[1] << std::endl;
+                rook = getPiece(rook_pos[0], rook_pos[1]);
+                if (rook != nullptr) {
+                    // move Rook in correct place
+                    new_pos[0] = fromRow + vec[0];
+                    new_pos[1] = fromColumn + vec[1];
+                    rook -> setPosition(new_pos[0], new_pos[1]);
+                    board.at(rook_pos[0]).at(rook_pos[1]) = nullptr;
+                    board.at(new_pos[0]).at(new_pos[1]) = rook;
+                    break;
+                }
+            }
+            rook_pos[0] += vec[0];
+            rook_pos[1] += vec[1];
+        }
+
         bool is_check = isCheckMate(piece_color);
         // restore
         piece -> setPosition(fromRow, fromColumn);
         board.at(toRow).at(toColumn) = temp;
         board.at(fromRow).at(fromColumn) = piece;
 
+        // restore Rook's pos
+        if (isCastling) {
+            rook -> setPosition(rook_pos[0], rook_pos[1]);
+            board.at(new_pos[0]).at(new_pos[1]) = nullptr;
+            board.at(rook_pos[0]).at(rook_pos[1]) = rook;
+        }
+
         return !is_check;
     }
     else{
         return false;
     }
-    // return piece -> canMoveToLocation(toRow, toColumn);
 }
-
-// need to check both canMoveToLocation and KingSafety
-// when king is on check
-// need to restrict canMoveToLocation only for king
-// bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColumn) {
-//     // find piece
-//     ChessPiece *piece = getPiece(fromRow, fromColumn);
-//     if (piece == nullptr) return false;
-//     Color pieceColor = piece->getColor();
-
-//     // find king agian??
-//     int kingRow = -1, kingCol = -1;
-//     for (int row = 0; row < numRows; row++) {
-//         for (int col = 0; col < numCols; col++) {
-//             ChessPiece* king = getPiece(row, col);
-//             if (king != nullptr && king->getType() == King && king->getColor() == pieceColor) {
-//                 kingRow = row;
-//                 kingCol = col;
-//             }
-//         }
-//     }
-
-//     bool kingInCheck = (kingRow != -1 && kingCol != -1) && isPieceUnderThreat(kingRow, kingCol);
-
-//     ChessPiece* targetPiece = getPiece(toRow, toColumn);
-//     board[toRow][toColumn] = piece;
-//     board[fromRow][fromColumn] = nullptr;
-
-//     bool kingStillInCheck = isPieceUnderThreat(kingRow, kingCol);
-
-//     board[fromRow][fromColumn] = piece;
-//     board[toRow][toColumn] = targetPiece;
-
-//     if (kingInCheck && kingStillInCheck) {
-//         return false;
-//     }
-
-//     if (!piece->canMoveToLocation(toRow, toColumn)) {
-//         return false;
-//     }
-
-//     if (piece->getType() == King && !KingSafety(toRow, toColumn, pieceColor)) {
-//         return false;
-//     }
-
-//     return true;
-// }
 
 bool ChessBoard::isPieceUnderThreat(int row, int column) {
     ChessPiece *piece = getPiece(row, column);

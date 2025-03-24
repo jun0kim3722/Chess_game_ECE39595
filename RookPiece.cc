@@ -43,6 +43,18 @@ bool RookPiece::canMoveToLocation(int toRow, int toCol)
     return false;
 }
 
+int RookPiece::getNumMoves() {
+    return _num_move;
+}
+
+void RookPiece::setPosition(int row, int column) {
+    ChessPiece::setPosition(row, column);
+    
+    _row = row;
+    _col = column;
+    _num_move += 1;
+}
+
 const char *RookPiece::toString()
 {
     return (getColor() == Black) ? u8"\u2656" : u8"\u265C";
