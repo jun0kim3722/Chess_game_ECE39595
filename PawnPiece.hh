@@ -16,8 +16,6 @@ namespace Student
 
         Type get_type();
 
-        void setPosition(int row, int column);
-
         bool canMoveToLocation(int toRow, int toColumn);
 
         const char *toString();

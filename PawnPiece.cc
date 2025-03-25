@@ -12,14 +12,6 @@ Type get_type() {
     return Pawn;
 }
 
-void PawnPiece::setPosition(int row, int column) {
-    ChessPiece::setPosition(row, column);
-    
-    _row = row;
-    _col = column;
-    _num_move += 1;
-}
-
 bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
     int max_row = _board.getNumRows();
     int max_col = _board.getNumCols();

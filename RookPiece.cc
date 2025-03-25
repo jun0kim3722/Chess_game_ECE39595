@@ -47,11 +47,7 @@ int RookPiece::getNumMoves() {
     return _num_move;
 }
 
-void RookPiece::setPosition(int row, int column) {
-    ChessPiece::setPosition(row, column);
-    
-    _row = row;
-    _col = column;
+void RookPiece::addMove() {
     _num_move += 1;
 }
 

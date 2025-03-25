@@ -4,9 +4,6 @@
 #include "BishopPiece.hh"
 #include "KingPiece.hh"
 
-#include <iostream>
-
-
 using Student::ChessBoard;
 
 ChessBoard::ChessBoard(int numRow, int numCol) {
@@ -49,6 +46,7 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     
     // move piece
     piece -> setPosition(toRow, toColumn);
+    piece -> addMove();
     board.at(toRow).at(toColumn) = piece;
     board.at(fromRow).at(fromColumn) = nullptr;
 
@@ -58,20 +56,20 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     if (piece -> getType() == King && (rowMag == 2 || colMag == 2)) {
         int vec[2] = {(rowMag != 0) ? (toRow - fromRow) / rowMag : 0, (rowMag != 0) ? (toColumn - fromColumn) / colMag : 0};
         int rook_pos[2] = {fromRow + vec[0], fromColumn + vec[1]};
-        while (rook_pos[0] < numRows && rook_pos[1] < numCols) {
-            std::cout << rook_pos[0] << rook_pos[1] << std::endl;
-            ChessPiece *rook = getPiece(rook_pos[0], rook_pos[1]);
+        while (rook_pos[0] > 0 && rook_pos[0] < numRows && rook_pos[1] > 0 && rook_pos[1] < numCols) {
+                ChessPiece *rook = getPiece(rook_pos[0], rook_pos[1]);
             if (rook != nullptr) {
                 // move Rook in correct place
                 int new_pos[2] = {fromRow + vec[0], fromColumn + vec[1]};
                 rook -> setPosition(new_pos[0], new_pos[1]);
+                rook -> addMove();
                 board.at(rook_pos[0]).at(rook_pos[1]) = nullptr;
                 board.at(new_pos[0]).at(new_pos[1]) = rook;
                 break;
             }
+            rook_pos[0] += vec[0];
+            rook_pos[1] += vec[1];
         }
-        rook_pos[0] += vec[0];
-        rook_pos[1] += vec[1];
     }
 
     turn = turn == White ? Black : White; // update turn
@@ -79,7 +77,6 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     return true;
 }
 
-#include <iostream>
 bool ChessBoard::isCheckMate(Color kingColor) {
     int currRow = -1, currCol = -1;
     for (std::vector<ChessPiece *> row_board : board) {
@@ -102,12 +99,6 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
 
     Color piece_color = piece -> getColor();
     if (piece -> canMoveToLocation(toRow, toColumn)) { // Only move when no check
-        // move piece
-        ChessPiece* temp = getPiece(toRow, toColumn);
-        piece -> setPosition(toRow, toColumn);
-        board.at(toRow).at(toColumn) = piece;
-        board.at(fromRow).at(fromColumn) = nullptr;
-
         // check castling
         bool isCastling = false;
         ChessPiece *rook;
@@ -121,23 +112,28 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
             int vec[2] = {(rowMag != 0) ? (toRow - fromRow) / rowMag : 0, (colMag != 0) ? (toColumn - fromColumn) / colMag : 0};
             rook_pos[0] = fromRow + vec[0];
             rook_pos[1] = fromColumn + vec[1];
-            while (rook_pos[0] < numRows && rook_pos[1] < numCols) {
-                std::cout << rook_pos[0] << rook_pos[1] << rowMag << colMag << std::endl;
-                // std::cout << rook_pos[0] << rook_pos[1] << vec[0] << vec[1] << std::endl;
-                rook = getPiece(rook_pos[0], rook_pos[1]);
+            while (rook_pos[0] > 0 && rook_pos[0] < numRows && rook_pos[1] > 0 && rook_pos[1] < numCols) {
+            rook = getPiece(rook_pos[0], rook_pos[1]);
                 if (rook != nullptr) {
                     // move Rook in correct place
                     new_pos[0] = fromRow + vec[0];
                     new_pos[1] = fromColumn + vec[1];
+
                     rook -> setPosition(new_pos[0], new_pos[1]);
                     board.at(rook_pos[0]).at(rook_pos[1]) = nullptr;
                     board.at(new_pos[0]).at(new_pos[1]) = rook;
                     break;
                 }
+                rook_pos[0] += vec[0];
+                rook_pos[1] += vec[1];
             }
-            rook_pos[0] += vec[0];
-            rook_pos[1] += vec[1];
         }
+
+        // move piece
+        ChessPiece* temp = getPiece(toRow, toColumn);
+        piece -> setPosition(toRow, toColumn);
+        board.at(toRow).at(toColumn) = piece;
+        board.at(fromRow).at(fromColumn) = nullptr;
 
         bool is_check = isCheckMate(piece_color);
         // restore
@@ -148,8 +144,8 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
         // restore Rook's pos
         if (isCastling) {
             rook -> setPosition(rook_pos[0], rook_pos[1]);
-            board.at(new_pos[0]).at(new_pos[1]) = nullptr;
             board.at(rook_pos[0]).at(rook_pos[1]) = rook;
+            board.at(new_pos[0]).at(new_pos[1]) = nullptr;
         }
 
         return !is_check;
@@ -213,29 +209,5 @@ std::ostringstream ChessBoard::displayBoard()
                  << std::endl;
 
     return outputString;
-}
-
-bool ChessBoard::isValidScan() {
-    for (int row = 0; row < numRows; row++) {
-        for (int col = 0; col < numCols; col++) {
-            ChessPiece* piece = getPiece(row, col);
-            if (piece != nullptr) {
-                std::cout << "\nChecking " << "(" << row << "," << col << ")...\n";
-
-                for (int targetRow = 0; targetRow < numRows; targetRow++) {
-                    for (int targetCol = 0; targetCol < numCols; targetCol++) {
-                        if (isValidMove(row, col, targetRow, targetCol)) {
-                            std::cout << "can move to (" 
-                                      << targetRow << "," << targetCol << ")\n";
-                        } else {
-                            std::cout << "cannot move to (" 
-                                      << targetRow << "," << targetCol << ")\n";
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return true;
 }
 

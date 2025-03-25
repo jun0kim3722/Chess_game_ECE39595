@@ -2,8 +2,6 @@
 #include "ChessBoard.hh"
 #include "ChessPiece.hh"
 
-#include <iostream>
-
 using Student::KingPiece;
 
 KingPiece::KingPiece(ChessBoard &board, Color color, int row, int col) : ChessPiece(board, color, row, col), _board(board)
@@ -39,8 +37,7 @@ bool KingPiece::isCastling(int toRow, int toCol) {
         int max_cols = _board.getNumCols();
         int vec[2] = {(rowMag != 0) ? (toRow - _row) / rowMag : 0, (colMag != 0) ? (toCol - _col) / colMag : 0};
         int rook_pos[2] = {_row + vec[0], _col + vec[1]};
-        while (rook_pos[0] < max_rows && rook_pos[1] < max_cols) {
-            std::cout << rook_pos[0] << rook_pos[1] << std::endl;
+        while (rook_pos[0] > 0 && rook_pos[0] < max_rows && rook_pos[1] > 0 && rook_pos[1] < max_cols) {
             ChessPiece *piece = _board.getPiece(rook_pos[0], rook_pos[1]);
             if (piece != nullptr) {
                 // Find Rook
@@ -77,11 +74,7 @@ bool KingPiece::canMoveToLocation(int toRow, int toCol)
     return false;
 }
 
-void KingPiece::setPosition(int row, int column) {
-    ChessPiece::setPosition(row, column);
-    
-    _row = row;
-    _col = column;
+void KingPiece::addMove() {
     _num_move += 1;
 }
 

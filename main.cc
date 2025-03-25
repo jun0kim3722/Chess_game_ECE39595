@@ -247,13 +247,14 @@ void isValid_scan(Student::ChessBoard& board) {
         Student::ChessPiece *piece = board.getPiece(pos.first, pos.second);
         std::cout << "Move: " << pos.first << "," << pos.second
             << " " << piece -> toString() << "--" << std::endl;
-
-        if (piece -> getType() == King && piece -> getColor() == White) {
-            printf(" ");
-        }
         
         for (int r = 0; r < max_row; r++) {
             for (int c = 0; c < max_col; c++) {
+
+                if (piece -> getType() == King && piece -> getColor() == White && pos.first == 7 && pos.second == 4 && r == 6 && c == 5) {
+                    printf(" ");
+                }
+
                 bool is_valid = board.isValidMove(pos.first, pos.second, r, c);
                 if (is_valid) {
                     std::cout << pos.first << ", " << pos.second
@@ -331,6 +332,10 @@ void read_test_file(std::string file_name) {
 
     // task
     for (;i < lines.size(); i++) {
+
+        if (i == 19) {
+            printf("v");
+        }
         
         if (lines[i] == "isValidScan") {
             std::cout << "--------------------------" << i + 1 << "-------------------------------" << std::endl;
@@ -594,20 +599,6 @@ void part1_4x4_7 () {
 // b k 3 1
 // w k 1 0
 
-void part3_basic_test () {
-    Student::ChessBoard sBoard(4, 4);
-    sBoard.createChessPiece(Black, Rook, 3, 3);
-    sBoard.createChessPiece(Black, Bishop, 0, 0);
-    sBoard.createChessPiece(Black, Bishop, 3, 0);
-    sBoard.createChessPiece(White, Rook, 2, 3);
-    sBoard.createChessPiece(Black, King, 3, 1);
-    sBoard.createChessPiece(White, King, 1, 0);
-    std::cout << "Initial Board:" << std::endl;
-    std::cout << sBoard.displayBoard().str() << std::endl;
-    sBoard.movePiece(2,3, 2,0);
-    sBoard.movePiece(3,3, 0,3);
-    sBoard.isValidScan();
-}
 int main()
 {
     // test_part1_4x4_PawnTest_isValid();
@@ -619,7 +610,12 @@ int main()
     // part1_4x4_3();
     // part1_4x4_7();
     // part3_basic_test();
-    read_test_file("part3_4x4_1.txt");
+
+    int num_of_test = 19;
+    for (int i = 0; i <= num_of_test; i++) {
+        std::cout << "*****************TEST" + std::to_string(i) + "********************" << std::endl;
+        read_test_file("part4_8x8_" + std::to_string(i) + ".txt");
+    }
 
     // Student::ChessBoard sBoard(4, 4);
     // sBoard.createChessPiece(White, King, 0, 0);

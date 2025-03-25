@@ -20,7 +20,7 @@ namespace Student
 
             int getNumMoves();
 
-            void setPosition(int row, int column);
+            void addMove();
 
             const char *toString();
         private:

@@ -95,6 +95,8 @@
       return -1;
     };
 
+    virtual void addMove() {};
+
   private:
     Color _color;
     int _row;

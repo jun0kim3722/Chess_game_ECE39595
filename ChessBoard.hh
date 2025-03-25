@@ -7,9 +7,6 @@
 #include <vector>
 #include <sstream>
 
-// #include <iostream>
-
-
 namespace Student
 {
     class ChessBoard
@@ -155,9 +152,6 @@ namespace Student
         std::ostringstream displayBoard();
 
         bool isCheckMate(Color color);
-
-        bool KingSafety(int row, int column, Color color);
-        bool isValidScan();
     };
 }
 

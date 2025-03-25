@@ -22,7 +22,7 @@ namespace Student
 
             bool canMoveToLocation(int toRow, int toCol);
 
-            void setPosition(int row, int column);
+            void addMove();
 
             const char *toString();
 
