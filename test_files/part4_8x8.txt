@@ -16,9 +16,9 @@ w r 7 0
 w r 7 7
 ~
 isValidScan
-movePiece 7 4 7 6
-isValidScan
 movePiece 0 4 0 6
+isValidScan
+movePiece 7 7 7 6
 isValidScan
 movePiece 0 3 3 6
 isValidScan

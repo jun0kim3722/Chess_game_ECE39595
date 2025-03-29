@@ -43,20 +43,14 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
 
     ChessPiece* temp = getPiece(toRow, toColumn);
     delete temp; // deleted killed piece
-    
-    // move piece
-    piece -> setPosition(toRow, toColumn);
-    piece -> addMove();
-    board.at(toRow).at(toColumn) = piece;
-    board.at(fromRow).at(fromColumn) = nullptr;
 
     // check castling
     int rowMag = abs(toRow - fromRow);
     int colMag = abs(toColumn - fromColumn);
     if (piece -> getType() == King && (rowMag == 2 || colMag == 2)) {
-        int vec[2] = {(rowMag != 0) ? (toRow - fromRow) / rowMag : 0, (rowMag != 0) ? (toColumn - fromColumn) / colMag : 0};
+        int vec[2] = {(rowMag != 0) ? (toRow - fromRow) / rowMag : 0, (colMag != 0) ? (toColumn - fromColumn) / colMag : 0};
         int rook_pos[2] = {fromRow + vec[0], fromColumn + vec[1]};
-        while (rook_pos[0] > 0 && rook_pos[0] < numRows && rook_pos[1] > 0 && rook_pos[1] < numCols) {
+        while (rook_pos[0] >= 0 && rook_pos[0] < numRows && rook_pos[1] >= 0 && rook_pos[1] < numCols) {
                 ChessPiece *rook = getPiece(rook_pos[0], rook_pos[1]);
             if (rook != nullptr) {
                 // move Rook in correct place
@@ -71,6 +65,12 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
             rook_pos[1] += vec[1];
         }
     }
+
+    // move piece
+    piece -> setPosition(toRow, toColumn);
+    piece -> addMove();
+    board.at(toRow).at(toColumn) = piece;
+    board.at(fromRow).at(fromColumn) = nullptr;
 
     turn = turn == White ? Black : White; // update turn
 
@@ -108,14 +108,14 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
         int rowMag = abs(toRow - fromRow);
         int colMag = abs(toColumn - fromColumn);
         if (piece -> getType() == King && (rowMag == 2 || colMag == 2)) {
-            isCastling = true;
             int vec[2] = {(rowMag != 0) ? (toRow - fromRow) / rowMag : 0, (colMag != 0) ? (toColumn - fromColumn) / colMag : 0};
             rook_pos[0] = fromRow + vec[0];
             rook_pos[1] = fromColumn + vec[1];
-            while (rook_pos[0] > 0 && rook_pos[0] < numRows && rook_pos[1] > 0 && rook_pos[1] < numCols) {
+            while (rook_pos[0] >= 0 && rook_pos[0] < numRows && rook_pos[1] >= 0 && rook_pos[1] < numCols) {
             rook = getPiece(rook_pos[0], rook_pos[1]);
                 if (rook != nullptr) {
                     // move Rook in correct place
+                    isCastling = true;
                     new_pos[0] = fromRow + vec[0];
                     new_pos[1] = fromColumn + vec[1];
 
@@ -160,10 +160,15 @@ bool ChessBoard::isPieceUnderThreat(int row, int column) {
     if (piece == nullptr) return false;
 
     Color tar_color = piece -> getColor();
-    for (std::vector<ChessPiece *> row_board : board) {
-        for (ChessPiece *opp : row_board) {
+    // for (std::vector<ChessPiece *> row_board : board) {
+    //     for (ChessPiece *opp : row_board) {
+    for (int r = 0; r < numRows; r++) {
+        for (int c = 0; c < numCols; c++) {
+            ChessPiece *opp = getPiece(r, c);
             if (opp != nullptr && opp -> getColor() != tar_color &&
-                opp -> canMoveToLocation(row, column)) return true;
+                opp -> canMoveToLocation(row, column)) {
+                    return true;
+                }
         }
     }
     return false;

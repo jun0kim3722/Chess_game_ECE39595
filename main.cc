@@ -245,15 +245,16 @@ void isValid_scan(Student::ChessBoard& board) {
         // board.check();
 
         Student::ChessPiece *piece = board.getPiece(pos.first, pos.second);
+        assert(pos.first == piece->getRow() && pos.second == piece->getColumn());
         std::cout << "Move: " << pos.first << "," << pos.second
             << " " << piece -> toString() << "--" << std::endl;
         
         for (int r = 0; r < max_row; r++) {
             for (int c = 0; c < max_col; c++) {
 
-                if (piece -> getType() == King && piece -> getColor() == White && pos.first == 7 && pos.second == 4 && r == 6 && c == 5) {
-                    printf(" ");
-                }
+                // if (piece -> getType() == King && pos.first == 0 && pos.second == 4 && r == 0 && c == 6) {
+                //     printf(" ");
+                // }
 
                 bool is_valid = board.isValidMove(pos.first, pos.second, r, c);
                 if (is_valid) {
@@ -274,7 +275,18 @@ void move_Piece(Student::ChessBoard& board, std::string move_info) {
     std::cout << "Move from: " << move_vec[0] << ", " << move_vec[1] << " | To: " << move_vec[2] << ", " << move_vec[3] << std::endl;
     board.movePiece(move_vec[0], move_vec[1], move_vec[2], move_vec[3]);
     std::cout << board.displayBoard().str() << std::endl;
-    // board.check();
+
+    // check incorrect moves;
+    int max_row = board.getNumRows();
+    int max_col = board.getNumCols();
+    for (int r = 0; r < max_row; r++) {
+        for (int c = 0; c < max_col; c++) {
+            Student::ChessPiece *piece = board.getPiece(r,c);
+            if (piece != nullptr) {
+                assert(r == piece->getRow() && c == piece->getColumn());
+            }
+        }
+    }
 }
 
 void read_test_file(std::string file_name) {
@@ -338,12 +350,12 @@ void read_test_file(std::string file_name) {
         }
         
         if (lines[i] == "isValidScan") {
-            std::cout << "--------------------------" << i + 1 << "-------------------------------" << std::endl;
+            std::cout << "-------------------------- Line: " << i + 1 << "-------------------------------" << std::endl;
             isValid_scan(sBoard);
         }
         // if (lines[i] == "underThreatScan") {isValid_scan(sBoard);
         if (lines[i].substr(0,9) == "movePiece") {
-            std::cout << "--------------------------" << i + 1 << "-------------------------------" << std::endl;
+            std::cout << "-------------------------- Line: " << i + 1 << "-------------------------------" << std::endl;
             move_Piece(sBoard, lines[i]);
         }
         // case "underThreatScan":
@@ -611,11 +623,13 @@ int main()
     // part1_4x4_7();
     // part3_basic_test();
 
-    int num_of_test = 19;
-    for (int i = 0; i <= num_of_test; i++) {
-        std::cout << "*****************TEST" + std::to_string(i) + "********************" << std::endl;
-        read_test_file("part4_8x8_" + std::to_string(i) + ".txt");
-    }
+    // int num_of_test = 19;
+    // for (int i = 0; i <= num_of_test; i++) {
+    //     std::cout << "*****************TEST" + std::to_string(i) + "********************" << std::endl;
+    //     read_test_file("part4_8x8_" + std::to_string(i) + ".txt");
+    // }
+
+    read_test_file("part4_8x8_10.txt");
 
     // Student::ChessBoard sBoard(4, 4);
     // sBoard.createChessPiece(White, King, 0, 0);
