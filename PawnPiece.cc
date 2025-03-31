@@ -16,7 +16,7 @@ bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
     int max_row = _board.getNumRows();
     int max_col = _board.getNumCols();
     if (toRow >= max_row || toColumn >= max_col
-        || toRow < 0 || toColumn < 0) return false; // moveing to off map
+        || toRow < 0 || toColumn < 0) return false; // moving off map
 
     if (toRow == _row + _forward && abs(toColumn - _col) == 1){
         ChessPiece *piece = _board.getPiece(toRow, toColumn);

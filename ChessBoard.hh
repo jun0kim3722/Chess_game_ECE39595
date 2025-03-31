@@ -152,6 +152,8 @@ namespace Student
         std::ostringstream displayBoard();
 
         bool isCheckMate(Color color);
+
+        bool isCheckMate(Color color, int fromRow, int fromColumn, int toRow, int toColumn);
     };
 }
 

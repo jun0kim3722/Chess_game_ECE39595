@@ -252,7 +252,11 @@ void isValid_scan(Student::ChessBoard& board) {
         for (int r = 0; r < max_row; r++) {
             for (int c = 0; c < max_col; c++) {
 
-                // if (piece -> getType() == King && pos.first == 0 && pos.second == 4 && r == 0 && c == 6) {
+                // if (piece -> getType() == King && pos.first == 7 && pos.second == 4 && r == 7 && c == 2) {
+                //     printf(" ");
+                // }
+
+                // if (board.getPiece(0,3) == nullptr) {
                 //     printf(" ");
                 // }
 
@@ -345,7 +349,7 @@ void read_test_file(std::string file_name) {
     // task
     for (;i < lines.size(); i++) {
 
-        if (i == 19) {
+        if (i == 21) {
             printf("v");
         }
         
@@ -629,7 +633,7 @@ int main()
     //     read_test_file("part4_8x8_" + std::to_string(i) + ".txt");
     // }
 
-    read_test_file("part4_8x8_10.txt");
+    read_test_file("part4_8x8_1.txt");
 
     // Student::ChessBoard sBoard(4, 4);
     // sBoard.createChessPiece(White, King, 0, 0);

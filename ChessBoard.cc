@@ -1,3 +1,4 @@
+
 #include "ChessBoard.hh"
 #include "PawnPiece.hh"
 #include "RookPiece.hh"
@@ -77,6 +78,20 @@ bool ChessBoard::movePiece(int fromRow, int fromColumn, int toRow, int toColumn)
     return true;
 }
 
+bool ChessBoard::isCheckMate(Color kingColor, int fromRow, int fromColumn, int toRow, int toColumn) {
+    // check skip over pos
+    int skipPos[2] = {(fromRow + toRow) / 2, (fromColumn + toColumn) / 2};
+    for (std::vector<ChessPiece *> row_board : board) {
+        for (ChessPiece *opp : row_board) {
+            if (opp != nullptr && opp -> getColor() != kingColor &&
+                opp -> canMoveToLocation(skipPos[0], skipPos[1])) {
+                    return true;
+            }
+        }
+    }
+    return isPieceUnderThreat(toRow, toColumn);
+}
+
 bool ChessBoard::isCheckMate(Color kingColor) {
     int currRow = -1, currCol = -1;
     for (std::vector<ChessPiece *> row_board : board) {
@@ -112,7 +127,7 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
             rook_pos[0] = fromRow + vec[0];
             rook_pos[1] = fromColumn + vec[1];
             while (rook_pos[0] >= 0 && rook_pos[0] < numRows && rook_pos[1] >= 0 && rook_pos[1] < numCols) {
-            rook = getPiece(rook_pos[0], rook_pos[1]);
+                rook = getPiece(rook_pos[0], rook_pos[1]);
                 if (rook != nullptr) {
                     // move Rook in correct place
                     isCastling = true;
@@ -135,7 +150,16 @@ bool ChessBoard::isValidMove(int fromRow, int fromColumn, int toRow, int toColum
         board.at(toRow).at(toColumn) = piece;
         board.at(fromRow).at(fromColumn) = nullptr;
 
-        bool is_check = isCheckMate(piece_color);
+        bool is_check;
+        
+        if (isCastling) {
+            is_check = isCheckMate(piece_color, fromRow,fromColumn, toRow, toColumn);
+        }
+        else {
+            is_check = isCheckMate(piece_color);
+        }
+
+
         // restore
         piece -> setPosition(fromRow, fromColumn);
         board.at(toRow).at(toColumn) = temp;
@@ -160,15 +184,10 @@ bool ChessBoard::isPieceUnderThreat(int row, int column) {
     if (piece == nullptr) return false;
 
     Color tar_color = piece -> getColor();
-    // for (std::vector<ChessPiece *> row_board : board) {
-    //     for (ChessPiece *opp : row_board) {
-    for (int r = 0; r < numRows; r++) {
-        for (int c = 0; c < numCols; c++) {
-            ChessPiece *opp = getPiece(r, c);
+    for (std::vector<ChessPiece *> row_board : board) {
+        for (ChessPiece *opp : row_board) {
             if (opp != nullptr && opp -> getColor() != tar_color &&
-                opp -> canMoveToLocation(row, column)) {
-                    return true;
-                }
+                opp -> canMoveToLocation(row, column)) return true;
         }
     }
     return false;
@@ -215,4 +234,3 @@ std::ostringstream ChessBoard::displayBoard()
 
     return outputString;
 }
-
