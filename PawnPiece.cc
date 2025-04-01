@@ -12,11 +12,19 @@ Type get_type() {
     return Pawn;
 }
 
+void PawnPiece::setPosition(int row, int column) {
+    ChessPiece::setPosition(row, column);
+    
+    _row = row;
+    _col = column;
+    _num_move += 1;
+}
+
 bool PawnPiece::canMoveToLocation(int toRow, int toColumn) {
     int max_row = _board.getNumRows();
     int max_col = _board.getNumCols();
     if (toRow >= max_row || toColumn >= max_col
-        || toRow < 0 || toColumn < 0) return false; // moving off map
+        || toRow < 0 || toColumn < 0) return false; // moveing to off map
 
     if (toRow == _row + _forward && abs(toColumn - _col) == 1){
         ChessPiece *piece = _board.getPiece(toRow, toColumn);
